@@ -9,7 +9,6 @@
 
 
 
-
 JNIEXPORT jstring JNICALL Java_com_example_yhj_jnitset_JNITest_get
 
   (JNIEnv *env, jclass jclass){
