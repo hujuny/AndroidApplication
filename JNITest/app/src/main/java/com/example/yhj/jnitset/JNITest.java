@@ -1,8 +1,9 @@
-package com.example.yhj.jnitset;
+﻿package com.example.yhj.jnitset;
 
 /**
  * Created by yhj on 2019/4/8.
  */
+
 
 public class JNITest {
 
