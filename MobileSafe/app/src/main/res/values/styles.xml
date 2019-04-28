@@ -6,6 +6,50 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--隐藏标题栏-->
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    
+    <style name="TitleStyle">
+        <item name="android:background">#8866ff00</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ContentStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="NextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/btn_green_selector</item>
+        <item name="android:drawableRight">@mipmap/next</item>
+        <item name="android:text">下一步</item>
+        <item name="android:onClick">next</item>
+    </style>
+
+    <style name="PreviousStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:background">@drawable/btn_green_selector</item>
+        <item name="android:drawableLeft">@mipmap/previous</item>
+        <item name="android:text">上一步</item>
+        <item name="android:onClick">previous</item>
     </style>
 
 </resources>

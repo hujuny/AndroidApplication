@@ -2,12 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+       style="@style/TitleStyle"
+        android:text="功能列表" />
+
+    <TextView
+        android:id="@+id/tv_elli"
+        android:text="欢迎来到手机卫士,手机卫士时刻保护你的安全！"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="10dp"/>
+
+    <GridView
+        android:id="@+id/gv_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:numColumns="3"
+        android:verticalSpacing="88dp"
+        android:layout_weight="1"/>
+
+
+
 
 
 </LinearLayout>

@@ -2,8 +2,10 @@ package com.example.yhj.mobilesafe;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +42,7 @@ import static com.example.yhj.mobilesafe.utils.StreamUtils.readFromStream;
 import static java.lang.System.currentTimeMillis;
 
 /*
-* 主页面(版本更新)
+* 闪屏页面(版本更新)
 * */
 
 public class SplashActivity extends AppCompatActivity {
@@ -51,6 +55,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private TextView tvVersion;
     private TextView tvProgress;//下载进度
+
+    private SharedPreferences mPref;//自动更新
+
+    private RelativeLayout rlRoot;
 
     //服务器返回的信息
     private  String mVersionName;//版本名
@@ -87,8 +95,26 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         tvVersion = (TextView) findViewById(R.id.tv_version);
         tvProgress= (TextView) findViewById(R.id.tv_progress );
+        rlRoot= (RelativeLayout) findViewById(R.id.rl_root);
+
         tvVersion.setText("版本号:"+getVersionName());
-        checkVersion();
+
+        mPref=getSharedPreferences("config",MODE_PRIVATE);
+
+        //判断是否需要自动更新
+        boolean autoUpdate=mPref.getBoolean("auto_update",true);
+        if(autoUpdate){
+            checkVersion();
+        }else {
+            mHandler.sendEmptyMessageDelayed(CODE_ENTER_HOME,2000);//设置延迟两秒发送消息
+        }
+
+        //设置闪屏页渐变动画效果
+        AlphaAnimation anim=new AlphaAnimation(0.3f,1f);
+        anim.setDuration(2000);
+        rlRoot.startAnimation(anim);
+
+
     }
 
     /*
@@ -134,7 +160,7 @@ public class SplashActivity extends AppCompatActivity {
                 Message msg=Message.obtain();//拿到一个消息
                 HttpURLConnection conn=null;
                 try {
-                    URL url=new URL("http://172.28.36.55:8080/update.json");
+                    URL url=new URL("http://172.24.229.247:8080/update.json");
                      conn= (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");//设置请求方法
                     conn.setConnectTimeout(5000);//设置连接超时
@@ -199,7 +225,8 @@ public class SplashActivity extends AppCompatActivity {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("最新版本"+mVersionName);
         builder.setMessage(mDesc);
-        builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+        //builder.setCancelable(false);//设置返回键无效,用户体验差。
+        builder.setNegativeButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Toast.makeText(SplashActivity.this,"升级成功",Toast.LENGTH_SHORT).show();
@@ -207,9 +234,19 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("下次再说", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                enterHome();
+            }
+        });
+
+        /*
+        * 设置取消侦听,用户点击返回键触发
+        * */
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
                 enterHome();
             }
         });
@@ -233,24 +270,31 @@ public class SplashActivity extends AppCompatActivity {
        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
            tvProgress.setVisibility(View.VISIBLE);//显示下载进度
            String target=Environment.getExternalStorageDirectory()+"/update.apk";
-           //xUtils
+           //xUtils,可在主线程中加载。框架已封装好
            HttpUtils utils=new HttpUtils();
            utils.download(mDownloadUrl, target, new RequestCallBack<File>() {
                @Override//下载成功
                public void onSuccess(ResponseInfo<File> responseInfo) {
-                   Toast.makeText(SplashActivity.this,"下载成功",Toast.LENGTH_SHORT).show();
+                   //Toast.makeText(SplashActivity.this,"下载成功",Toast.LENGTH_SHORT).show();
+                   //跳转到安装页面
+                   Intent intent=new Intent(Intent.ACTION_VIEW);
+                   intent.addCategory(Intent.CATEGORY_DEFAULT);
+                   intent.setDataAndType(Uri.fromFile(responseInfo.result),"application/vnd.android.package-archive");
+                   //startactivity(intent);
+                   startActivityForResult(intent,0);
                }
 
                @Override//下载失败
                public void onFailure(HttpException e, String s) {
-                   System.out.println(mDownloadUrl);
+                   //System.out.println(mDownloadUrl);
                    Toast.makeText(SplashActivity.this,"下载失败",Toast.LENGTH_SHORT).show();
                    enterHome();
                }
 
                @Override//下载进度
                public void onLoading(long total, long current, boolean isUploading) {
-                   System.out.println(current*100/total);
+                   //System.out.println(current*100/total);
+                   super.onLoading(total, current, isUploading);
                    tvProgress.setText("下载进度"+current*100/total+"%");
                }
            });
@@ -259,4 +303,12 @@ public class SplashActivity extends AppCompatActivity {
        }
     }
 
+    /*
+    * 如果用户取消安装，会返回结果，回调onActivityResult
+    * */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        enterHome();
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
