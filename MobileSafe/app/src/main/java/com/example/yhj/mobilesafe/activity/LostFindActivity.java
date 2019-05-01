@@ -1,5 +1,8 @@
 package com.example.yhj.mobilesafe.activity;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yhj.mobilesafe.R;
+import com.example.yhj.mobilesafe.receiver.AdminReceiver;
+
 /**
  * 手机防盗页面
  * */
@@ -24,6 +29,12 @@ public class LostFindActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ComponentName mDeviceAdminSample = new ComponentName(LostFindActivity.this, AdminReceiver.class);//设备管理组件
+        //激活设备管理器
+       Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
+        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "哈哈哈，我们有了设备管理器，好夺目，好炫彩！！！");
+        startActivity(intent);
         mPref=getSharedPreferences("config",MODE_PRIVATE);
         boolean configed=mPref.getBoolean("configed",false);//判断是否进入过设置向导，默认没有
         if(configed){
