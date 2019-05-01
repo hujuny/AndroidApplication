@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,9 +23,13 @@ public class BootCompleteReceiver extends BroadcastReceiver {
                 TelephonyManager tm= (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 String currentSim=tm.getSimSerialNumber();
                 if(sim.equals(currentSim)){
-                    System.out.println("手机安全");
+                    //System.out.println("手机安全");
                 }else{
-                    System.out.println("手机不安全");
+                    String phone=sp.getString("safe_phone","");
+                    SmsManager sms=SmsManager.getDefault();
+                    sms.sendTextMessage(phone,null,"sim have changed!!!",null,null);
+
+                    //System.out.println("手机不安全");
                 }
             }
         }
