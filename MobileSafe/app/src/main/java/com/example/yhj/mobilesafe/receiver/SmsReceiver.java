@@ -20,8 +20,6 @@ import com.example.yhj.mobilesafe.service.LocationService;
  * */
 public class SmsReceiver extends BroadcastReceiver {
 
-
-
     @Override
     public void onReceive(Context context, Intent intent) {
         Object[] objects= (Object[]) intent.getExtras().get("pdus");

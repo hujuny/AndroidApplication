@@ -17,7 +17,7 @@
         android:text="报警短信会发送给安全号码" />
 
     <EditText
-        android:inputType="phone"
+        android:inputType="number"
         android:id="@+id/et_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

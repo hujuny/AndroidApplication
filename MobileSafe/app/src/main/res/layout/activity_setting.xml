@@ -11,11 +11,28 @@
 
 
     <com.example.yhj.mobilesafe.view.SettingItemView
-        android:onClick="click"
         android:id="@+id/siv_update"
         update:desc_off="自动更新已关闭"
         update:desc_on="自动更新已开启"
         update:title="自动更新设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.example.yhj.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_address"
+        update:desc_off="归属地显示已开启"
+        update:desc_on="归属地显示已关闭"
+        update:title="电话归属地显示设设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.example.yhj.mobilesafe.view.SettingClickView
+        android:id="@+id/scv_address_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.example.yhj.mobilesafe.view.SettingClickView
+        android:id="@+id/address_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

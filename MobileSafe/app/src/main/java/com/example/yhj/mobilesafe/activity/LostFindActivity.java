@@ -3,8 +3,10 @@ package com.example.yhj.mobilesafe.activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,16 +27,24 @@ public class LostFindActivity extends AppCompatActivity {
     private TextView tvSafePhone;
     private ImageView ivLock;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ComponentName mDeviceAdminSample = new ComponentName(LostFindActivity.this, AdminReceiver.class);//设备管理组件
-        //激活设备管理器
-       Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
-        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "哈哈哈，我们有了设备管理器，好夺目，好炫彩！！！");
-        startActivity(intent);
+         ComponentName mDeviceAdminSample = new ComponentName(LostFindActivity.this, AdminReceiver.class);//设备管理组件
+        DevicePolicyManager mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);//获取设备策略服务
+       if(mDPM.isAdminActive(mDeviceAdminSample)){
+            //System.out.println("已经开启了手机设备管理器");
+        }else {
+            //激活设备管理器
+            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "哈哈哈，我们有了设备管理器，好夺目，好炫彩！！！");
+            startActivity(intent);
+        }
+
         mPref=getSharedPreferences("config",MODE_PRIVATE);
         boolean configed=mPref.getBoolean("configed",false);//判断是否进入过设置向导，默认没有
         if(configed){
