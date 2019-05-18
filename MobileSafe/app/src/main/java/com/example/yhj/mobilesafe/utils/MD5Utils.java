@@ -1,9 +1,5 @@
 package com.example.yhj.mobilesafe.utils;
 
-import android.os.Message;
-
-import com.lidroid.xutils.cache.MD5FileNameGenerator;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Utils {
     public static String encode(String password){
+
+
         try {
             MessageDigest instance=MessageDigest.getInstance("MD5");//获取MD5加密算法对象
             byte[] digest=instance.digest(password.getBytes());
@@ -32,6 +30,7 @@ public class MD5Utils {
             e.printStackTrace();//没有该算法时，抛出异常
         }
         return "";
+
 
     }
 }

@@ -6,12 +6,14 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 
 import com.example.yhj.mobilesafe.R;
 import com.example.yhj.mobilesafe.service.AddressService;
+import com.example.yhj.mobilesafe.service.CallSafeService;
 import com.example.yhj.mobilesafe.utils.ServiceStatusUtils;
 import com.example.yhj.mobilesafe.view.SettingClickView;
 import com.example.yhj.mobilesafe.view.SettingItemView;
@@ -30,6 +32,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private SettingClickView scvAddressStyle;//修改风格
     private SettingClickView scvAddressLocation;//修改归属地位置
+    private SettingItemView sivCallSafe;
 
 
     @Override
@@ -42,9 +45,37 @@ public class SettingActivity extends AppCompatActivity {
         initAddressView();
         initAddressStyle();
         initAddressLocation();
+        initBlackView();
     }
 
+    /**
+     * 初始化黑名单
+     */
+    private void initBlackView() {
+        sivCallSafe = (SettingItemView) findViewById(R.id.siv_call_safe);
 
+        //根据黑名单服务是否运行来更新checkbox
+        boolean serviceRunning = ServiceStatusUtils.isServiceRunning(this, "com.example.yhj.mobilesafe.service.CallSafeService");
+        if (serviceRunning){
+            sivCallSafe.setChecked(true);
+        }else {
+            sivCallSafe.setChecked(false);
+        }
+        sivCallSafe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sivCallSafe.isChecked()){
+                    sivCallSafe.setChecked(false);
+                    stopService(new Intent(SettingActivity.this, CallSafeService.class));
+                }else {
+                    sivCallSafe.setChecked(true);
+                    startService(new Intent(SettingActivity.this,CallSafeService.class));
+                    System.out.println("开启了服务");
+                }
+            }
+        });
+
+    }
 
 
     /*

@@ -2,6 +2,9 @@ package com.example.yhj.mobilesafe.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.provider.Telephony;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,11 +22,6 @@ import android.widget.Toast;
 
 import com.example.yhj.mobilesafe.R;
 import com.lidroid.xutils.cache.MD5FileNameGenerator;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static android.os.Build.VERSION_CODES.O;
 
 
 /*
@@ -57,11 +55,25 @@ public class HomeActivity extends AppCompatActivity {
 
         //设置监听
         gvHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0://手机防盗
                         showPasswordDialog();
+                             break;
+                    case 1://通讯卫士
+
+                        /*为了设置默认sms应用
+                        Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+
+                        intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, "com.example.yhj.mobilesafe");
+                        startActivity(intent);*/
+
+                        startActivity(new Intent(HomeActivity.this,CallSafeActivity.class));
+                        break;
+                    case 2://软件管理
+                        startActivity(new Intent(HomeActivity.this,AppManagerActivity.class));
                         break;
                     case 7://高级工具
                         startActivity(new Intent(HomeActivity.this,AToolsActivity.class));

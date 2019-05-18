@@ -36,5 +36,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.example.yhj.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_call_safe"
+        update:desc_off="黑名单管理已开启"
+        update:desc_on="黑名单管理已关闭"
+        update:title="黑名单管理设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

@@ -23,4 +23,28 @@
         android:layout_height="wrap_content" />
 
 
+    <TextView
+        android:text="短信备份"
+        android:textSize="20sp"
+        android:background="#ADD8E6"
+        android:textColor="@color/black"
+        android:drawableLeft="@android:drawable/ic_menu_crop"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:clickable="true"
+        android:onClick="backUpSms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ProgressBar
+        android:id="@+id/sms_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
 </LinearLayout>

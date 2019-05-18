@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/iv_icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
+
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:maxLines="1"
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:gravity="center_vertical"
+                android:paddingLeft="5.0dp"
+                android:text="标题" />
+
+            <TextView
+                android:textSize="14sp"
+                android:textColor="#99000000"
+                android:id="@+id/tv_apk_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:paddingRight="5.0dp"
+                android:text="应用程序大小" />
+        </LinearLayout>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#99000000"
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="5.0dp"
+            android:text="安装位置" />
+    </LinearLayout>
+
+</LinearLayout>

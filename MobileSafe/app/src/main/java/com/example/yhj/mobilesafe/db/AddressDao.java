@@ -58,6 +58,7 @@ public class AddressDao {
                                 address=cursor.getString(0);
                             }
                             cursor.close();
+
                         }
 
                     }
@@ -65,6 +66,8 @@ public class AddressDao {
             }
         }
         return address;
+
+
     }
 }
 
