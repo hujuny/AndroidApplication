@@ -16,14 +16,15 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WIFI_STATE_CHANGED"/>
-    <uses-permission android:name="android.launcher2.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
-    <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WIFI_STATE_CHANGED" />
+    <uses-permission android:name="android.launcher2.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
-    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/frog"
@@ -38,7 +39,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.HomeActivity">
+            <intent-filter>
+
+                <!-- 这个名字可以随便取 -->
+                <action android:name="aaa" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.LostFindActivity" />
         <activity android:name=".activity.Setup1Activity" />
@@ -101,7 +110,14 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.AppManagerActivity"></activity>
+        <activity android:name=".activity.AppManagerActivity" />
+        <activity android:name=".activity.TaskManagerActivity" />
+        <activity android:name=".activity.TaskManagerSettingActivity" />
+
+        <service
+            android:name=".service.KillProcessService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

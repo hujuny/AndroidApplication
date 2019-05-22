@@ -87,6 +87,7 @@ public class BlackNumberDao {
         cursor.close();
         db.close();
         SystemClock.sleep(3000);
+
         return lists;
     }
 

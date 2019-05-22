@@ -1,10 +1,16 @@
 package com.example.yhj.mobilesafe.utils;
 
 import android.app.ActivityManager;
-import android.content.Context;
+import android.app.ActivityManager.MemoryInfo;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningServiceInfo;
-import android.content.res.AssetManager;
+import android.content.Context;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -25,5 +31,65 @@ public class ServiceStatusUtils {
         }
 
         return false;
+    }
+
+    /**
+     * 返回进程的总个数
+     * @param context
+     * @return
+     */
+    public static int getProcessCount(Context context){
+        //得到进程管理者
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        //获取到当前手机上面运行的进程
+        List<RunningAppProcessInfo> runningAppProcesses = manager.getRunningAppProcesses();
+        //获取手机上面一共有多少个进程
+        Log.d("ServiceStatusUtils","进程是多少个"+runningAppProcesses.size());
+        return runningAppProcesses.size();
+    }
+
+    /**
+     * 返回剩余的内存
+     * @param context
+     * @return
+     */
+    public static long getAvailMem(Context context){
+        //得到进程管理者
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        MemoryInfo memoryInfo = new MemoryInfo();
+        //获取到内存的基本信息
+        manager.getMemoryInfo(memoryInfo);
+        //获取到剩余内存
+        return memoryInfo.availMem;
+    }
+
+    /**
+     * 获取到总内存
+     * @param context
+     * @return
+     */
+    public static long getTotalMem(Context context){
+        /*
+        * 这个地方不能直接跑到低版本的手机上面
+        * 这个方法memoryInfo.totalMem()
+        * */
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(new File("/proc/meminfo"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String line = bufferedReader.readLine();
+            StringBuilder buffer = new StringBuilder();
+
+            for (char c:line.toCharArray()) {
+                if (c>='0'&&c<='9'){
+                    buffer.append(c);
+                }
+            }
+
+            return Long.parseLong(buffer.toString())*1024;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

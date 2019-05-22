@@ -9,29 +9,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-/**
-*
-* ━━━━━━神兽出没━━━━━━
-* 　　　┏┓　　　┏┓
-* 　　┏┛┻━━━┛┻┓
-* 　　┃　　　　　　　┃
-* 　　┃　　　━　　　┃
-* 　　┃　┳┛　┗┳　┃
-* 　　┃　　　　　　　┃
-* 　　┃　　　┻　　　┃
-* 　　┃　　　　　　　┃
-* 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
-* 　　　　┃　　　┃    神兽保佑,代码无bug
-* 　　　　┃　　　┃
-* 　　　　┃　　　┗━━━┓
-* 　　　　┃　　　　　　　┣┓
-* 　　　　┃　　　　　　　┏┛
-* 　　　　┗┓┓┏━┳┓┏┛
-* 　　　　　┃┫┫　┃┫┫
-* 　　　　　┗┻┛　┗┻┛
-*
-* ━━━━━━感觉萌萌哒━━━━━━
-*/
+
 public class Crypto {
 	/**
 	 * Encrypt plain string and encode to Base64

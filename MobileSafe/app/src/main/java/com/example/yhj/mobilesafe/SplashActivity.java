@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
@@ -36,12 +36,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import static android.R.attr.x;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-import static android.os.Build.VERSION_CODES.O;
-import static com.example.yhj.mobilesafe.utils.StreamUtils.readFromStream;
-import static java.lang.System.currentTimeMillis;
 
 /*
 * 闪屏页面(版本更新)
@@ -105,6 +99,9 @@ public class SplashActivity extends AppCompatActivity {
 
         copyDB();
 
+        //创建快捷方式
+        createShortcut();
+
         //判断是否需要自动更新
         boolean autoUpdate = mPref.getBoolean("auto_update", true);
         if (autoUpdate) {
@@ -119,6 +116,37 @@ public class SplashActivity extends AppCompatActivity {
         rlRoot.startAnimation(anim);
 
 
+    }
+
+    /**
+     * 创建快捷方式
+     */
+    private void createShortcut() {
+
+        Intent intent = new Intent();
+        intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        //如果设置为true，表示可以创建重复的快捷方式
+        intent.putExtra("duplicate",false);
+
+        /**
+         * 1 干什么事情
+         * 2 你叫什么名字
+         * 3你长成什么样子
+         */
+
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, BitmapFactory.decodeResource(getResources(),R.mipmap.bind));
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,"手机卫士");
+        /**
+         * 干什么事情
+         * 这个地方不能使用显示意图
+         * 必须使用隐式意图，因为桌面不清楚this是什么东西
+         */
+        Intent shortcutIntent = new Intent();
+        shortcutIntent.setAction("aaa");
+        shortcutIntent.addCategory("android.intent.category.DEFAULT");
+
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT,shortcutIntent);
+        sendBroadcast(intent);
     }
 
     /*

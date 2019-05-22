@@ -37,6 +37,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
+
+        <include
+            android:id="@+id/list_View"
+            layout="@layout/list_view" />
+
         <TextView
             android:id="@+id/tv_app"
             android:layout_width="match_parent"
@@ -45,9 +52,6 @@
             android:background="#ff888888"
             android:text="用户程序(5)个" />
 
-        <include
-        android:id="@+id/list_View"
-            layout="@layout/list_view" />
     </FrameLayout>
 
 

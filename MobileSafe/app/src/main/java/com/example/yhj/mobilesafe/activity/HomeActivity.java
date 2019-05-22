@@ -3,11 +3,10 @@ package com.example.yhj.mobilesafe.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.provider.Telephony;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,33 @@ import android.widget.Toast;
 
 import com.example.yhj.mobilesafe.R;
 import com.lidroid.xutils.cache.MD5FileNameGenerator;
+
+/**
+ *                    _ooOoo_
+ *                   o8888888o
+ *                   88" . "88
+ *                   (| -_- |)
+ *                   O\  =  /O
+ *                ____/`---'\____
+ *              .'  \\|     |//  `.
+ *             /  \\|||  :  |||//  \
+ *            /  _||||| -:- |||||-  \
+ *            |   | \\\  -  /// |   |
+ *            | \_|  ''\---/''  |   |
+ *            \  .-\__  `-`  ___/-. /
+ *          ___`. .'  /--.--\  '. .'__
+ *       ."" '<  `.___\_<|>_/___.'  >'"".
+ *      | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *      \  \ `-.   \_ __\ /__ _/   .-` /  /
+ * ======`-.____`-.___\_____/___.-`____.-'======
+ *				  	`=---='
+ *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *               佛祖保佑       永无bug
+*/
+
+
+
+
 
 
 /*
@@ -77,6 +103,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case 7://高级工具
                         startActivity(new Intent(HomeActivity.this,AToolsActivity.class));
+                        break;
+                    case 3://进程管理
+                        startActivity(new Intent(HomeActivity.this,TaskManagerActivity.class));
                         break;
                     case 8://设置中心
                         startActivity(new Intent(HomeActivity.this, SettingActivity.class));

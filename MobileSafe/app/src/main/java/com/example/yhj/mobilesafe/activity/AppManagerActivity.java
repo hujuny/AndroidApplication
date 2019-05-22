@@ -71,6 +71,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+
             adapter = new AppManagerAdapter();
             listView.setAdapter(adapter);
             super.handleMessage(msg);
@@ -192,6 +193,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("AppManagerActivity", "onReceive: 接收到卸载的广播了");
+            initData();
         }
     }
 
@@ -217,20 +219,14 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.ll_start://运行
                 Intent startLocalIntent = this.getPackageManager().getLaunchIntentForPackage(clickInfo.getApkPackageName());
-                this.startActivity(startLocalIntent);
+                startActivity(startLocalIntent);
                 popupWindowDismiss();
                 break;
             case R.id.ll_uninstall://卸载
+
                 Intent uninstallLocalIntent = new Intent("android.intent.action.DELETE", Uri.parse("package:" + clickInfo.getApkPackageName()));
                 startActivity(uninstallLocalIntent);
                 popupWindowDismiss();
-                if (adapter==null){
-                    new AppManagerAdapter();
-                    listView.setAdapter(adapter);
-                }else {
-                    adapter.notifyDataSetChanged();//刷新界面
-                    Log.d("AppManagerActivity", "onClick: 已经刷新了界面");
-                }
                 break;
 
         }
