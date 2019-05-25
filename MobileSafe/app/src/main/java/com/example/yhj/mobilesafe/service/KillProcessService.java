@@ -25,6 +25,9 @@ public class KillProcessService extends Service {
 
     }
 
+    /**
+     * 锁屏清理进程
+     */
     private class LockScreenReceiver extends BroadcastReceiver{
 
         @Override

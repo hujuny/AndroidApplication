@@ -101,12 +101,16 @@ public class HomeActivity extends AppCompatActivity {
                     case 2://软件管理
                         startActivity(new Intent(HomeActivity.this,AppManagerActivity.class));
                         break;
-                    case 7://高级工具
-                        startActivity(new Intent(HomeActivity.this,AToolsActivity.class));
-                        break;
                     case 3://进程管理
                         startActivity(new Intent(HomeActivity.this,TaskManagerActivity.class));
                         break;
+                    case 5://进程管理
+                        startActivity(new Intent(HomeActivity.this,AntivirusActivity.class));
+                        break;
+                    case 7://高级工具
+                        startActivity(new Intent(HomeActivity.this,AToolsActivity.class));
+                        break;
+
                     case 8://设置中心
                         startActivity(new Intent(HomeActivity.this, SettingActivity.class));
                         break;

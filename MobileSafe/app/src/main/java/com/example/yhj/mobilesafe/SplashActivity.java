@@ -20,11 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yhj.mobilesafe.activity.HomeActivity;
+import com.example.yhj.mobilesafe.bean.Virus;
+import com.example.yhj.mobilesafe.db.AntivirusDao;
 import com.example.yhj.mobilesafe.utils.StreamUtils;
+import com.example.yhj.mobilesafe.utils.ToastUtils;
+import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,6 +88,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     };
+    private AntivirusDao dao;
 
 
     @Override
@@ -97,10 +103,13 @@ public class SplashActivity extends AppCompatActivity {
 
         mPref = getSharedPreferences("config", MODE_PRIVATE);
 
-        copyDB();
+        copyDB("address.db");
+        copyDB("antivirus.db");
 
         //创建快捷方式
         createShortcut();
+        //更新病毒数据库
+        updateVirus();
 
         //判断是否需要自动更新
         boolean autoUpdate = mPref.getBoolean("auto_update", true);
@@ -347,15 +356,15 @@ public class SplashActivity extends AppCompatActivity {
     /*
     * 拷贝数据库
     * */
-    private void copyDB() {
-        File destFile = new File(getFilesDir(), "address.db");// 要拷贝的目标地址
+    private void copyDB(String dbName) {
+        File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
         if (destFile.exists()) {
             return;
         }
         FileOutputStream out = null;
         InputStream in = null;
         try {
-            in = getAssets().open("address.db");
+            in = getAssets().open(dbName);
             out = new FileOutputStream(destFile);
             int len = -1;
             byte[] buffer = new byte[1024];
@@ -374,6 +383,41 @@ public class SplashActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 更新数据库
+     */
+    private void updateVirus(){
+        dao = new AntivirusDao();
+        //联网从服务器获取最新的数据的md5的特征码
+        HttpUtils utils = new HttpUtils();
+        utils.send(HttpMethod.GET, "http://172.28.145.103:8080//virus.json", new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+
+                //解析json
+                try {
+                    /*JSONObject jsonObject = new JSONObject(responseInfo.result);
+                    String md5 = jsonObject.getString("md5");
+                    String desc = jsonObject.getString("desc");
+                    AntivirusDao.addVirus(md5,desc);*/
+
+                    JSONObject jsonObject = new JSONObject(responseInfo.result);
+                    Gson gson = new Gson();
+                    Virus virus=gson.fromJson(responseInfo.result, Virus.class);
+                    AntivirusDao.addVirus(virus.md5,virus.desc);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                ToastUtils.showToast(SplashActivity.this,"病毒数据库更新失败，请检查你的网络！");
+            }
+        });
     }
 
 }

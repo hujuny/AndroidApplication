@@ -9,8 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="10dp"
+        android:text="添加黑名单"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="添加黑名单" />
+        android:background="#66ff6600"/>
 
     <EditText
         android:id="@+id/et_number"
