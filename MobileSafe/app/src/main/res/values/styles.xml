@@ -56,5 +56,23 @@
         <item name="android:textSize">16.0dip</item>
         <item name="android:textColor">@color/textColorPrimaryDark</item>
     </style>
+    
+    
+    <style name="MyProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_medium_white</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">3500</item>
+        <item name="android:maxHeight">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:maxWidth">48dp</item>
+        <item name="android:minWidth">48dp</item>
+    </style>
 
+    <style name="MyHorizontalProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:maxHeight">20dp</item>
+        <item name="android:minHeight">20dp</item>
+    </style>
 </resources>

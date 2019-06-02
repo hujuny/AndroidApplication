@@ -65,11 +65,11 @@ public class SmsUtils {
                 serializer.attribute(null,"size", String.valueOf(count));
 
                 while (cursor.moveToNext()) {
-                    System.err.println("----------------------------");
+                   /* System.err.println("----------------------------");
                     System.out.println("address = " + cursor.getString(0));
                     System.out.println("date = " + cursor.getString(1));
                     System.out.println("type = " + cursor.getString(2));
-                    System.out.println("body = " + Crypto.decrypt("123",cursor.getString(3)));
+                    System.out.println("body = " + Crypto.decrypt("123",cursor.getString(3)));*/
                     serializer.startTag(null, "sms");
 
                     serializer.startTag(null, "address");

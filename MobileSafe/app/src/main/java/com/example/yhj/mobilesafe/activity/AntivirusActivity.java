@@ -137,7 +137,6 @@ public class AntivirusActivity extends AppCompatActivity {
                 case FINISH:
                     //当扫描结束的时候，停止动画
                     iv_scanning.clearAnimation();
-                    scanInfo = (ScanInfo) msg.obj;
 
 
                     break;
@@ -159,7 +158,7 @@ public class AntivirusActivity extends AppCompatActivity {
         builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent uninstallLocalIntent = new Intent("android.intent.action.DELETE", Uri.parse("package:com.example.yhj.mobilesafe.test"));
+                Intent uninstallLocalIntent = new Intent("android.intent.action.DELETE", Uri.parse("package:"+scanInfo.packageName));
                 startActivity(uninstallLocalIntent);
             }
         });
@@ -238,8 +237,6 @@ public class AntivirusActivity extends AppCompatActivity {
                 }
                 message=Message.obtain();
                 message.what=FINISH;
-                message.obj = scanInfo;
-                handler.sendMessage(message);
 
 
             }

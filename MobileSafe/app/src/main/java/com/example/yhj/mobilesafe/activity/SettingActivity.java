@@ -3,22 +3,18 @@ package com.example.yhj.mobilesafe.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-
 
 import com.example.yhj.mobilesafe.R;
 import com.example.yhj.mobilesafe.service.AddressService;
 import com.example.yhj.mobilesafe.service.CallSafeService;
+import com.example.yhj.mobilesafe.service.WatchDogService;
 import com.example.yhj.mobilesafe.utils.ServiceStatusUtils;
 import com.example.yhj.mobilesafe.view.SettingClickView;
 import com.example.yhj.mobilesafe.view.SettingItemView;
-
-import static java.lang.reflect.Array.getInt;
 
 
 /*
@@ -33,6 +29,7 @@ public class SettingActivity extends AppCompatActivity {
     private SettingClickView scvAddressStyle;//修改风格
     private SettingClickView scvAddressLocation;//修改归属地位置
     private SettingItemView sivCallSafe;
+    private SettingItemView sv_watch_dog;
 
 
     @Override
@@ -46,6 +43,33 @@ public class SettingActivity extends AppCompatActivity {
         initAddressStyle();
         initAddressLocation();
         initBlackView();
+        initWatchDogView();
+    }
+
+    /**
+     * 初始化看门狗
+     */
+    private void initWatchDogView() {
+        sv_watch_dog = (SettingItemView) findViewById(R.id.sv_watch_dog);
+        final Intent watchdogIntent = new Intent(SettingActivity.this, WatchDogService.class);
+
+        if (ServiceStatusUtils.isServiceRunning(SettingActivity.this,"com.example.yhj.mobilesafe.service.WatchDogService")){
+            sv_watch_dog.setChecked(true);
+        }else {
+            sv_watch_dog.setChecked(false);
+        }
+        sv_watch_dog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sv_watch_dog.isChecked()){
+                    sv_watch_dog.setChecked(false);
+                    stopService(watchdogIntent);
+                }else {
+                    sv_watch_dog.setChecked(true);
+                    startService(watchdogIntent);
+                }
+            }
+        });
     }
 
     /**

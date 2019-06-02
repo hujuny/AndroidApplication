@@ -33,7 +33,7 @@ public class Crypto {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String decrypt(String seed, String encrypted)
+	static String decrypt(String seed, String encrypted)
 			throws Exception {
 		byte[] rawKey = getRawKey(seed.getBytes());
 		byte[] enc = Base64.decode(encrypted.getBytes(), Base64.DEFAULT);

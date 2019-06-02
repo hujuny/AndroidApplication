@@ -44,5 +44,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.example.yhj.mobilesafe.view.SettingItemView
+        android:id="@+id/sv_watch_dog"
+        update:desc_off="看门狗已开启"
+        update:desc_on="看门狗已关闭"
+        update:title="看门狗设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

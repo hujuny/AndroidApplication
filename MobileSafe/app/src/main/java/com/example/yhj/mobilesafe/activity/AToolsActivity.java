@@ -78,4 +78,20 @@ public class AToolsActivity extends AppCompatActivity {
 
 
     }
+
+    /**
+     * 程序锁
+     * @param v
+     */
+    public void appLock(View v){
+        startActivity(new Intent(AToolsActivity.this,AppLockActivity.class));
+    }
+
+    /**
+     * 二维码扫描
+     * @param v
+     */
+    public void qrCode(View v){
+        startActivity(new Intent(AToolsActivity.this,QRcodeActivity.class));
+    }
 }

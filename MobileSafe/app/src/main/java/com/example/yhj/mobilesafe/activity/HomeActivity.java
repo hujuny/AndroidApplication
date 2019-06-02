@@ -104,8 +104,14 @@ public class HomeActivity extends AppCompatActivity {
                     case 3://进程管理
                         startActivity(new Intent(HomeActivity.this,TaskManagerActivity.class));
                         break;
-                    case 5://进程管理
+                    case 4://流量统计
+                        startActivity(new Intent(HomeActivity.this,TrafficStatisticsActivity.class));
+                        break;
+                    case 5://病毒查杀
                         startActivity(new Intent(HomeActivity.this,AntivirusActivity.class));
+                        break;
+                    case 6://缓存清理
+                        startActivity(new Intent(HomeActivity.this,CleanCacheActivity.class));
                         break;
                     case 7://高级工具
                         startActivity(new Intent(HomeActivity.this,AToolsActivity.class));
@@ -182,10 +188,12 @@ public class HomeActivity extends AppCompatActivity {
 
         View view = View.inflate(this, R.layout.dialog_set_password, null);
         dialog.setView(view, 0, 0, 0, 0);
+
         final EditText etPassword=view.findViewById(R.id.et_password);
          final EditText etPasswordConfirm=view.findViewById(R.id.et_password_confirm);
         Button btnOK=view.findViewById(R.id.btn_ok);
         Button btnCancel=view.findViewById(R.id.btn_cancel);
+
          btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
