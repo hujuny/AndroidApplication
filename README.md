@@ -3,6 +3,7 @@
 
 #OfflineUpdateDemo
 在线升级demo
+
 使用过程存在的问题：
  java.lang.NoClassDefFoundError: Failed resolution of: Lorg/apache/http/protocol/BasicHttpContext;
  使用<uses-library android:name="org.apache.http.legacy" android:required="false" />
