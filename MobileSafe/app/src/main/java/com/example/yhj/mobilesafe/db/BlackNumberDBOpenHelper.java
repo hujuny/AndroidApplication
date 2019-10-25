@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BlackNumberDBOpenHelper extends SQLiteOpenHelper {
 
-    public BlackNumberDBOpenHelper(Context context) {
+    BlackNumberDBOpenHelper(Context context) {
         super(context, "safe.db", null, 1);
     }
 

@@ -113,8 +113,8 @@ public class SettingActivity extends AppCompatActivity {
             sivUpdate.setChecked(false);
         }else{
             sivUpdate.setChecked(true);
-
         }
+
         sivUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

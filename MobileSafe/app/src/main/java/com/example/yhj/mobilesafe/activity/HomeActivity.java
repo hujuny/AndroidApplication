@@ -45,11 +45,6 @@ import com.lidroid.xutils.cache.MD5FileNameGenerator;
  *               佛祖保佑       永无bug
 */
 
-
-
-
-
-
 /*
 * 主页面
 * */
@@ -243,15 +238,28 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = View.inflate(HomeActivity.this, R.layout.home_list_item, null);
-            ImageView ivItem = view.findViewById(R.id.iv_item);
-            TextView tvItem = view.findViewById(R.id.tv_item);
-            tvItem.setText(mItems[position]);
-            ivItem.setImageResource(mPics[position]);
+            View view;
+            ViewHolder viewHolder;
+            if (convertView==null){
+                view = View.inflate(HomeActivity.this, R.layout.home_list_item, null);
+                viewHolder=new ViewHolder();
+                viewHolder.ivItem=view.findViewById(R.id.iv_item);
+                viewHolder.tvItem=view.findViewById(R.id.tv_item);
+                view.setTag(viewHolder);
+            }else {
+                view=convertView;
+                viewHolder= (ViewHolder) view.getTag();
+            }
+            viewHolder.tvItem.setText(mItems[position]);
+            viewHolder.ivItem.setImageResource(mPics[position]);
 
             return view;
         }
     }
 
+    class ViewHolder{
+        ImageView ivItem;
+        TextView tvItem;
+    }
 
 }

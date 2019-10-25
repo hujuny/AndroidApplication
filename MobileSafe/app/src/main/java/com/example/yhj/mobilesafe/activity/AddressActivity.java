@@ -1,10 +1,8 @@
 package com.example.yhj.mobilesafe.activity;
 
-import android.animation.Animator;
-import android.os.Vibrator;
-import android.support.annotation.RequiresPermission;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -33,17 +31,20 @@ public class AddressActivity extends AppCompatActivity {
          tvResult= (TextView) findViewById(R.id.tv_result);
 
         etNumber.addTextChangedListener(new TextWatcher() {//文本框监听器
+            //当文本发生变化以前
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
+            //当文本发生变化
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String address= AddressDao.getAddress(s.toString());
                 tvResult.setText(address);
             }
 
+            //文本发生变化之后
             @Override
             public void afterTextChanged(Editable s) {
 

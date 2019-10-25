@@ -136,6 +136,7 @@ public class CallSafeService extends Service {
     private class CallSafeReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
+            //Android设备接收到的SMS是以pdu形式的(protocol description unit)。所以从intent提取数据时就会遇到pdus。
             Object[] objects = (Object[]) intent.getExtras().get("pdus");
 
             for (Object object : objects) {

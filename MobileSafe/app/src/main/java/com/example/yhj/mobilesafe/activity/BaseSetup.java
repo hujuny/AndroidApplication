@@ -26,7 +26,7 @@ public abstract class BaseSetup extends AppCompatActivity {
         mDetector=new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
             @Override//监听手势滑动事件，e1表示滑动的起点，e2表示滑动终点。velocityX表示水平速度，velocityY表示垂直速度
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                //判断纵向滑动幅度是否过大，过大的话不允许切换界面
+                //判断纵向滑动幅度是否过大，过大的话不允许切换界面,getRaw表示触摸点的在x，y轴距离
                 if(Math.abs(e2.getRawY()-e1.getRawY())>100){
                     Toast.makeText(BaseSetup.this,"不能这样滑哦！",Toast.LENGTH_SHORT).show();
                     return true;

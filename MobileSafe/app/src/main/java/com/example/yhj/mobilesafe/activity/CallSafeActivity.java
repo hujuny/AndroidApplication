@@ -136,7 +136,7 @@ public class CallSafeActivity extends AppCompatActivity {
 
                 //blackNumberInfos = blackNumberDao.selectAll();//查询所有
                 //blackNumberInfos = blackNumberDao.findPar(mCurrentPageNumber, mPageSize);//分页加载
-                //分页加载数据
+                //分批加载数据
                 if (blackNumberInfos==null){
                     blackNumberInfos=blackNumberDao.findPar2(mStartIndex,maxCount);
                 }else {

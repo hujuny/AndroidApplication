@@ -42,11 +42,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /*
 * 闪屏页面(版本更新)
 * */
 
 public class SplashActivity extends AppCompatActivity {
+
+
 
     private static final int CODE_UPDATE_DIALOG = 0;
     private static final int CODE_URL_ERROR = 1;
@@ -142,9 +146,9 @@ public class SplashActivity extends AppCompatActivity {
          * 2 你叫什么名字
          * 3你长成什么样子
          */
-
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, BitmapFactory.decodeResource(getResources(),R.mipmap.bind));
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME,"手机卫士");
+
         /**
          * 干什么事情
          * 这个地方不能使用显示意图
@@ -201,6 +205,9 @@ public class SplashActivity extends AppCompatActivity {
                 Message msg = Message.obtain();//拿到一个消息
                 HttpURLConnection conn = null;
                 try {
+                    /*
+                     * 请求网络
+                     */
                     URL url = new URL("http://172.24.38.95:8080/update.json");
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");//设置请求方法
@@ -305,7 +312,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     /*
-    * 下载新版apk
+    * 下载新版apk，借用xutils框架
     * */
     public void download() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {

@@ -90,6 +90,7 @@ public class TrafficStatisticsActivity extends AppCompatActivity {
         long mobileTxBytes = TrafficStats.getMobileTxBytes();
         cacheInfo.mobileTxBytes = mobileTxBytes;
 
+
         cacheLists.add(cacheInfo);
     }
 

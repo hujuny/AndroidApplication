@@ -117,7 +117,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         UninstallReceiver receiver = new UninstallReceiver();
         IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
         filter.addDataScheme("package");
-        registerReceiver(receiver,filter);
+        registerReceiver(receiver, filter);
 
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -177,6 +177,8 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
                     view.getLocationInWindow(location);
                     popUpWindow.showAtLocation(parent, Gravity.LEFT + Gravity.TOP, 70, location[1]);
 
+                    //缩放动画；
+                    //Animation.RELATIVE_TO_SELF(相对于自身)、Animation.RELATIVE_TO_PARENT(相对于父控件(容器)）。
                     ScaleAnimation sa = new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     sa.setDuration(2000);
                     contentView.startAnimation(sa);
@@ -188,7 +190,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     /**
      * 卸载广播
      */
-    private class UninstallReceiver extends BroadcastReceiver{
+    private class UninstallReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -204,7 +206,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
             case R.id.ll_share://分享
                 Intent shareIntent = new Intent("android.intent.action.SEND");
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra("android.intent.extra.SUBJECT", "f分享");
+                shareIntent.putExtra("android.intent.extra.SUBJECT", "分享");
                 shareIntent.putExtra("android.intent.extra.TEXT",
                         "Hi！推荐您使用软件：" + clickInfo.getApkName() + "下载地址:" + "https://play.google.com/store/apps/details?id=" + clickInfo.getApkPackageName());
                 this.startActivity(Intent.createChooser(shareIntent, "分享"));
@@ -278,7 +280,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
 
             //如果当前的position是0，表示应用程序
             if (position == 0) {
-               TextView textView = new TextView(AppManagerActivity.this);
+                TextView textView = new TextView(AppManagerActivity.this);
                 textView.setText("用户程序(" + userAppInfos.size() + ")");
                 textView.setBackgroundColor(Color.GRAY);
                 textView.setTextColor(Color.WHITE);

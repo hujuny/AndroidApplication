@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
@@ -16,15 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yhj.mobilesafe.R;
 import com.example.yhj.mobilesafe.db.AddressDao;
-
-import static android.R.attr.endX;
-import static android.R.attr.startX;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static com.example.yhj.mobilesafe.db.AddressDao.getAddress;
 
 /**
  * 来电提醒的服务
@@ -66,6 +59,7 @@ public class AddressService extends Service {
         receiver=new OutCallReceiver();
         IntentFilter filter=new IntentFilter(Intent.ACTION_NEW_OUTGOING_CALL);
         registerReceiver(receiver,filter);//动态注册广播
+
 
         super.onCreate();
     }

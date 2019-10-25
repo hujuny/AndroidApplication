@@ -3,15 +3,16 @@
     android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/launcher_bg">
+    android:background="@mipmap/bgsafe">
 
     <TextView
-        android:textSize="18sp"
+        android:textSize="23sp"
         android:textColor="#000"
         android:id="@+id/tv_version"
         android:shadowColor="#f00"
         android:shadowDx="2"
         android:shadowDy="2"
+        android:text="字体很早的"
         android:shadowRadius="2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -20,6 +21,7 @@
 
 
     <ProgressBar
+        android:layout_marginTop="16dp"
         style="@style/MyProgressBar"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/tv_version"

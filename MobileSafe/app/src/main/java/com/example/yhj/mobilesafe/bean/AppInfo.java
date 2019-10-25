@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by yhj on 2019/5/14.
  */
 
+
 public class AppInfo {
 
     private Drawable icon;//图片icon
@@ -62,7 +63,7 @@ public class AppInfo {
 
     public void setApkPackageName(String apkPackageName) {
         this.apkPackageName = apkPackageName;
-    }
+   }
 
     @Override
     public String toString() {

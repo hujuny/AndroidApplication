@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,8 +15,6 @@ import com.example.yhj.mobilesafe.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static android.R.attr.data;
 
 public class ContactActivity extends AppCompatActivity {
 
@@ -47,6 +45,7 @@ public class ContactActivity extends AppCompatActivity {
         * 首先，从raw_contacts中读取联系人的id（"contact_id"）
         * 其次，根据contact_id从data表中查询出相应的电话号码和联系人
         * 然后，根据mimetype来区分那个是联系人那个是电话号码
+        * raw_contacts；data；mimetypes
         * */
         Uri rawContactUri=Uri.parse("content://com.android.contacts/raw_contacts");
         Uri dataUri=Uri.parse("content://com.android.contacts/data");
@@ -57,7 +56,7 @@ public class ContactActivity extends AppCompatActivity {
             while(rawContactCursor.moveToNext()){
                 String contactId=rawContactCursor.getString(0);
                 //System.out.println("id是是"+contactId);
-                //根据contact_id从data表中查询出相应的电话号码和联系人
+                //根据contact_id从data表中查询出相应的电话号码和联系人；视图关联mimetype
                 Cursor dataCursor=getContentResolver().query(dataUri,new String[]{"data1","mimetype"},"contact_id=?",new String[]{contactId},null);
                 if(dataCursor!=null){
                     HashMap<String,String> map=new HashMap<>();

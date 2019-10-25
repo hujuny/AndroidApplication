@@ -22,7 +22,6 @@ import com.example.yhj.mobilesafe.engine.TaskInfoParser;
 import com.example.yhj.mobilesafe.utils.ServiceStatusUtils;
 import com.example.yhj.mobilesafe.utils.SharedPreferencesUtils;
 import com.example.yhj.mobilesafe.utils.ToastUtils;
-import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ public class TaskManagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_manager);
-        ViewUtils.inject(this);
+
 
         initUI();
         initData();
@@ -191,6 +190,7 @@ public class TaskManagerActivity extends AppCompatActivity {
            ViewHolder viewHolder;
             View view;
 
+            //如果复用的view不为空,并且能转化为子类布局文件,获取viewHolder对象,否则加载布局文件,重新进行设置复用的view
             if (convertView!=null&&convertView instanceof LinearLayout){
                 view=convertView;
                  viewHolder = (ViewHolder) view.getTag();
@@ -304,6 +304,8 @@ public class TaskManagerActivity extends AppCompatActivity {
                 killList.add(taskInfo);
                 totalCount++;
                 killMem+=taskInfo.getMemorySize();
+                //杀死进程，参数表示包名
+                activityManager.killBackgroundProcesses(taskInfo.getPackageName());
             }
         }
 

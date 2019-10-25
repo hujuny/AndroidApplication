@@ -13,8 +13,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 
-import static android.location.Criteria.ACCURACY_FINE;
-
 public class LocationService extends Service {
 
     private LocationManager lm;
@@ -40,13 +38,6 @@ public class LocationService extends Service {
         String bestProvider = lm.getBestProvider(ct, true);//设置最好的提供者
         listener = new MyLocationListener();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         lm.requestLocationUpdates(bestProvider, 0, 0, listener);//参数一位置提供者，参数二最短更新时间，参数三最短更新距离

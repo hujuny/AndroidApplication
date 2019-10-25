@@ -5,15 +5,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import com.example.yhj.mobilesafe.bean.AppInfo;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by yhj on 2019/5/14.
@@ -50,9 +47,9 @@ public class AppInfos {
             long apkSize = file.length();
             appInfo.setApkSize(apkSize);
 
-            Log.d(TAG, "getAppInfos: 程序的名字"+apkName);
+            /*Log.d(TAG, "getAppInfos: 程序的名字"+apkName);
             Log.d(TAG, "getAppInfos: 程序的包名"+packageName);
-            Log.d(TAG, "getAppInfos: 程序的大小"+apkSize);
+            Log.d(TAG, "getAppInfos: 程序的大小"+apkSize);*/
 
             //获取到安装应用程序的标记
             int flags = installedPackage.applicationInfo.flags;

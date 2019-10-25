@@ -1,9 +1,7 @@
 package com.example.yhj.mobilesafe.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.yhj.mobilesafe.R;
 

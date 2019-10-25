@@ -38,8 +38,8 @@ public class SettingClickView extends RelativeLayout{
     private void initView() {
         // 将自定义好的布局文件设置给当前的SettingClickView
         View.inflate(getContext(), R.layout.view_setting_click, this);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
-        tvDesc = (TextView) findViewById(R.id.tv_desc);
+        tvTitle = findViewById(R.id.tv_title);
+        tvDesc = findViewById(R.id.tv_desc);
     }
 
     public void setTitle(String title) {

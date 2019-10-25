@@ -5,12 +5,9 @@
     android:orientation="vertical" >
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:background="#8866ff00"
-        android:gravity="center"
+        style="@style/TitleStyle"
         android:text="进程管理"
-        android:textSize="24sp" />
+         />
 
     <LinearLayout
         android:layout_width="match_parent"

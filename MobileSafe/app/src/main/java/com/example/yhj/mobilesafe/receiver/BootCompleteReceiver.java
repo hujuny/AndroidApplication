@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 
+/**
+ * 开机检测SIM卡是否发生变动
+ */
 public class BootCompleteReceiver extends BroadcastReceiver {
 
     @Override
@@ -27,7 +29,10 @@ public class BootCompleteReceiver extends BroadcastReceiver {
                 }else{
                     String phone=sp.getString("safe_phone","");
                     SmsManager sms=SmsManager.getDefault();
+                    //第一个参数，对方手机号码，参数二，短信中心号码，一般为null，第三个参数，短信内容，
+                    //第四个参数，setIntent判断短信是否发送(动作)成功，参数五，deliveryIntent，强调发送后的结果
                     sms.sendTextMessage(phone,null,"sim have changed!!!",null,null);
+
 
                     //System.out.println("手机不安全");
                 }

@@ -53,7 +53,6 @@ public class BlackNumberDao {
         values.put("mode",mode);
         int rawNumber = db.update("blacknumber", values, "number=?", new String[]{number});
         return rawNumber != 0;
-
     }
 
     /*
