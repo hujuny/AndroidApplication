@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ddd">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:shadowColor="#f00"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:text="在线升级"
+        android:textColor="#000"
+        android:textSize="23sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_root"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <ProgressBar
+            android:id="@+id/pb_number"
+            style="@style/MyHorizontalProgressBar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:max="100" />
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pb_number"
+            android:layout_alignStart="@+id/pb_number"
+            android:text="下载进度:"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
