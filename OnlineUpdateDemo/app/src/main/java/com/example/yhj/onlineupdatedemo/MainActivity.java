@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 获取本地版本号
+     *
      * @return
      */
     private long getVersionCode() {
@@ -36,4 +38,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return -1;
     }
+
+
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OnlineUpdateDemo</string>
+    <string name="online_update">在线升级</string>
+    <string name="download_current">下载进度:</string>
 </resources>

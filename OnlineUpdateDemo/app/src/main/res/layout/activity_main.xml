@@ -13,7 +13,7 @@
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="2"
-        android:text="在线升级"
+        android:text="@string/online_update"
         android:textColor="#000"
         android:textSize="23sp" />
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/pb_number"
             android:layout_alignStart="@+id/pb_number"
-            android:text="下载进度:"
+            android:text="@string/download_current"
             android:textSize="24sp" />
 
     </RelativeLayout>

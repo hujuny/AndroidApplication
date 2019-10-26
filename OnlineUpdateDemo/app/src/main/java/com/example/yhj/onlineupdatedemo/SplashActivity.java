@@ -56,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
     private int mVersionCode;//版本号
     private String mDownloadUrl;//下载链接
     private ProgressBar pbNumber;
+    private RelativeLayout rlRoot;
 
 
     private Handler mHandler = new Handler() {
@@ -82,7 +83,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     };
-    private RelativeLayout rlRoot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +194,7 @@ public class SplashActivity extends AppCompatActivity {
 
     /**
      * 获取本地版本号
+     *
      * @return
      */
     private long getVersionCode() {
@@ -201,12 +202,12 @@ public class SplashActivity extends AppCompatActivity {
         try {
             PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);//获取包信息
             long versionCode = packageInfo.getLongVersionCode();
-
+            Log.i("yhj", "版本号" + versionCode);
             return versionCode;
         } catch (PackageManager.NameNotFoundException | NoSuchMethodError e) {//没有包名会走此异常
             e.printStackTrace();
         }
-        return -1;
+        return 1;
     }
 
     /**
@@ -307,6 +308,8 @@ public class SplashActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
